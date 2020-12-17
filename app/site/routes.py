@@ -20,7 +20,7 @@ def callback():
         <script>
             const token = window.location.href.split('=')[1].split('&')[0];
             console.log(token);
-            window.location.href = "http://localhost:5000/auth?token=" + token;
+            window.location.href = "https://hiketn.herokuapp.com/auth?token=" + token;
         </script>
     '''
 
