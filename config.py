@@ -8,7 +8,7 @@ os.environ['DB_NAME'] = 'd8tem6ngbp77em'
 
 os.environ['AUTH0_CLIENT_ID'] = 'W6nH6vK5zg9TveeDZQaAP8tybGrEeP3d'
 os.environ['AUTH0_CLIENT_SECRET'] = 'CLN1xPvWGta_Txr0nqN7jyrk8n4KXm8tB3RgPqN_U-tvwafZMMvGXgfNS8Zy1abZ'
-os.environ['AUTH0_CALLBACK_URL'] = 'http://localhost:5000/callback'
+os.environ['AUTH0_CALLBACK_URL'] = 'https://hiketn.herokuapp.com/callback'
 os.environ['AUTH0_DOMAIN'] = 'strudev-tn.eu.auth0.com'
 os.environ['AUTH0_AUDIENCE'] = 'HikeTNAPI'
 
