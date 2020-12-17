@@ -1,0 +1,97 @@
+GET http://localhost:5000/ HTTP/1.1
+
+###
+
+GET http://localhost:5000/api/trails?page=1 HTTP/1.1
+
+###
+
+GET http://localhost:5000/api/regions?page=1 HTTP/1.1
+
+###
+
+GET http://localhost:5000/api/reviews?page=1 HTTP/1.1
+
+###
+
+POST http://localhost:5000/api/regions HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Ben Arous",
+    "reg_type": "Cold"
+}
+
+###
+
+POST http://localhost:5000/api/trails HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Chenini2",
+    "distance": 5,
+    "elevation": 200,
+    "difficulty": "intermediate",
+    "coordination": {"region": "Tataouine", "lat": 32.9232228504901, "lon": 10.260753677963038},
+    "parking": false
+}
+
+###
+
+POST http://localhost:5000/api/reviews HTTP/1.1
+content-type: application/json
+
+{
+    "rating": 4,
+    "comment": "You never know if you stepped on an Amazighi foot print or a start wars character",
+    "trail_id": 17
+}
+
+###
+
+DELETE http://localhost:5000/api/regions/26 HTTP/1.1
+
+###
+
+PATCH http://localhost:5000/api/regions/28 HTTP/1.1
+content-type: application/json
+
+{
+    "reg_type": "Cold"
+}
+
+###
+
+DELETE http://localhost:5000/api/trails/20 HTTP/1.1
+
+###
+
+PATCH http://localhost:5000/api/trails/20 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "C3"
+}
+
+###
+
+DELETE http://localhost:5000/api/reviews/25 HTTP/1.1
+
+###
+
+PATCH http://localhost:5000/api/reviews/25 HTTP/1.1
+content-type: application/json
+
+{
+    "rating": 1
+}
+
+###
+
+GET http://localhost:5000/login HTTP/1.1
+
+###
+
+GET http://localhost:5000/callback HTTP/1.1
+
+###
