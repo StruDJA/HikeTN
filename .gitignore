@@ -1,3 +1,5 @@
 venv
 migrations
 __pycache__
+.git
+requests.rest

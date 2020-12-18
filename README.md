@@ -1,4 +1,8 @@
-# Full Stack Trivia API Backend
+# Full Stack HikeTN API Backend
+
+### Discover your next hike from hikers like you.
+
+## Live app at [Heroku](https://hiketn.herokuapp.com)
 
 ## Getting Started
 
@@ -16,7 +20,7 @@ We recommend working within a virtual environment whenever using Python for proj
 
 #### PIP Dependencies
 
-Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
+Once you have your virtual environment setup and running, install dependencies by running:
 
 ```bash
 pip install -r requirements.txt
@@ -24,82 +28,68 @@ pip install -r requirements.txt
 
 This will install all of the required packages we selected within the `requirements.txt` file.
 
-##### Key Dependencies
-
-- [Flask](http://flask.pocoo.org/)  is a lightweight backend microservices framework. Flask is required to handle requests and responses.
-
-- [SQLAlchemy](https://www.sqlalchemy.org/) is the Python SQL toolkit and ORM we'll use handle the lightweight sqlite database. You'll primarily work in app.py and can reference models.py. 
-
-- [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests from our frontend server. 
-
-## Database Setup
-With Postgres running, restore a database using the trivia.psql file provided. From the backend folder in terminal run:
-```bash
-psql trivia < trivia.psql
-```
+## ENV Variables Setup
+Set your app, database and Auth0 variables within the `config.py` file.
 
 ## Running the server
 
-From within the `backend` directory first ensure you are working using your created virtual environment.
+From within the main directory first ensure you are working using your created virtual environment.
 
 To run the server, execute:
 
 ```bash
-export FLASK_APP=flaskr
-export FLASK_ENV=development
-flask run
+export FLASK_APP=app
+flask run --reload
 ```
 
-Setting the `FLASK_ENV` variable to `development` will detect file changes and restart the server automatically.
+Using `--reload` will detect file changes and restart the server automatically.
 
-Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` directory and the `__init__.py` file to find the application. 
-
-
-#### Frontend
-
-#### Installing Node and NPM
-
-This project depends on Nodejs and Node Package Manager (NPM). Before continuing, you must download and install Node (the download includes NPM) from [https://nodejs.com/en/download](https://nodejs.org/en/download/).
-
-#### Installing project dependencies
-
-This project uses NPM to manage software dependencies. NPM Relies on the package.json file located in the `frontend` directory of this repository. After cloning, open your terminal and run:
-
-```bash
-npm install
-```
-
-#### Running Your Frontend in Dev Mode
-
-The frontend app was built using create-react-app. In order to run the app in development mode use ```npm start``` from frontend folder. You can change the script in the ```package.json``` file. 
-
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits.<br>
-
-```bash
-npm start
-```
-
-By default, the frontend will run on localhost:3000. 
+Setting the `FLASK_APP` variable to `app` directs flask to use the `app` directory and the `__init__.py` file to find the application. 
 
 
 ## Testing
-In order to run tests navigate to the backend folder and run the following commands:
+In order to run tests use the following command:
 
 ```bash
-dropdb trivia_test
-createdb trivia_test
-psql trivia_test < trivia.psql
-python test_flaskr.py
+python test_app.py
 ```
-The first time you run the tests, omit the dropdb command. 
 
 All tests are kept in that file and should be maintained as updates are made to app functionality.
+
+## Authentication
+
+The authentication system used for this project is Auth0.
+
+The `/login` endpoint will redirect you to Auth0 login page then to the `/auth` endpoint where you will get your JWT access token for the API after retrieving it upon successful callback from `/callback` endpoint.
+
+```bash
+{
+  "success":true, "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imc2TktBSHp5b094TWRMNzRGcWlKNyJ9.eyJpc3MiOiJodHRwczovL3N0cnVkZXYtdG4uZXUuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmZGJmZjI4NGQ2ZTViMDA2Y2Y2OGNlNyIsImF1ZCI6Ikhpa2VUTkFQSSIsImlhdCI6MTYwODI2ODE0NiwiZXhwIjoxNjA4Mjc1MzQ2LCJhenAiOiJXNm5INnZLNXpnOVR2ZWVEWlFhQVA4dHliR3JFZVAzZCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnJlZ2lvbnMiLCJkZWxldGU6cmV2aWV3cyIsImRlbGV0ZTp0cmFpbHMiLCJnZXQ6cmV2aWV3cyIsInBhdGNoOnJlZ2lvbnMiLCJwYXRjaDpyZXZpZXdzIiwicGF0Y2g6dHJhaWxzIiwicG9zdDpyZWdpb25zIiwicG9zdDpyZXZpZXdzIiwicG9zdDp0cmFpbHMiXX0.dwKtaGp-SU6x8yvqD1A-so07sD0aGncuVnAZSk97jFxod3UoEFK38-4KagBtwZmkMdPpKQCO7vOULkH-fNlex4vFB-QNBmcRJOKwGeZkHW8njQCQhHtUTROR7Jt_2ypoGe3EdbyKGYGcyUYskZ0lY6-fO8eiaqssxCCsd2E-CBrg_UAkMJTza-oqCMtNuWqyvQlMctsGkBte5o7_57lbVIC5h5iofYVF9VvDGn7EzWAeT4v8y059v1dXyXjfgGpMMW6lDxcqRVZY334YmmsCWbBwdUN8W6U1x6EehJZr-uGcWoFwUZ7dLCDimGWAfd_S8r4AKQBFy-8DIHwk95qtKw",
+  "token_type": "Bearer"
+}
+```
+
+## Authorization
+
+The Auth0 JWT includes claims for permissions based on the user's role within the Auth0 system. 
+
+You can use `postman` or the command line tool `curl` after copying your JWT token like the following:
+
+```bash
+export TOKEN='type_your_token_here'
+```
+
+Then:
+
+```bash
+curl -d '{"rating":4,"comment":"star wars","trail_id":17}' -H "Content-type: application/json" -X POST 'http://127.0.0.1:5000/api/reviews' -H "Authorization: Bearer ${TOKEN}" | jq .
+
+```
 
 ## API Reference
 
 ### Getting Started
-- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, `http://127.0.0.1:5000/`, which is set as a proxy in the frontend configuration. 
-- Authentication: This version of the application does not require authentication or API keys. 
+- Base URL: The app can be run locally or from its base URL at Heroku. The backend app is hosted at `https://hiketn.herokuapp.com`.
 
 ### Error Handling
 Errors are returned as JSON objects in the following format:
@@ -110,271 +100,86 @@ Errors are returned as JSON objects in the following format:
     "message": "bad request"
 }
 ```
-The API will return three error types when requests fail:
+The API will return these error types when requests fail:
 - 400: Bad Request
+- 401: Authorization is expected
+- 403: Access denied
 - 404: Resource Not Found
 - 405: Method not allowed
 - 422: Not Processable 
 - 500: Internal server error
 
 ### Endpoints 
-#### GET /categories
+#### GET /api/regions
 - General:
-    - Returns a list of category objects, success value, and total number of categories.
-    
-- Sample: `curl http://127.0.0.1:5000/categories`
-
-``` {
-  "categories": [
-    {
-      "id": 1,
-      "type": "Science"
-    },
-    {
-      "id": 2,
-      "type": "Art"
-    },
-    {
-      "id": 3,
-      "type": "Geography"
-    },
-    {
-      "id": 4,
-      "type": "History"
-    },
-    {
-      "id": 5,
-      "type": "Entertainment"
-    },
-    {
-      "id": 6,
-      "type": "Sports"
-    }
-  ],
-  "success": true,
-  "total_categories": 6
-}
-```
-
-#### GET /questions
-- General:
-    - Returns a list of question objects, categories, current categories, success value, and total number of questions
+    - Returns a list of region objects, success value, and total number of regions.
     - Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.
-- Sample: `curl http://127.0.0.1:5000/questions?page=1`
-```
-{
-  "categories": [
-    {
-      "id": 1,
-      "type": "Science"
-    },
-    {
-      "id": 2,
-      "type": "Art"
-    },
-    {
-      "id": 3,
-      "type": "Geography"
-    },
-    {
-      "id": 4,
-      "type": "History"
-    },
-    {
-      "id": 5,
-      "type": "Entertainment"
-    },
-    {
-      "id": 6,
-      "type": "Sports"
-    }
-  ],
-  "current_category": [
-    4,
-    5,
-    6,
-    3
-  ],
-  "questions": [
-    {
-      "answer": "Muhammad Ali",
-      "category": 4,
-      "difficulty": 1,
-      "id": 24,
-      "question": "What boxer's original name is Cassius Clay?"
-    },
-    {
-      "answer": "Maya Angelou",
-      "category": 4,
-      "difficulty": 2,
-      "id": 5,
-      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
-    },
-    {
-      "answer": "Apollo 13",
-      "category": 5,
-      "difficulty": 4,
-      "id": 2,
-      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
-    },
-    {
-      "answer": "Tom Cruise",
-      "category": 5,
-      "difficulty": 4,
-      "id": 4,
-      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
-    },
-    {
-      "answer": "Edward Scissorhands",
-      "category": 5,
-      "difficulty": 3,
-      "id": 6,
-      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
-    },
-    {
-      "answer": "Brazil",
-      "category": 6,
-      "difficulty": 3,
-      "id": 10,
-      "question": "Which is the only team to play in every soccer World Cup tournament?"
-    },
-    {
-      "answer": "Uruguay",
-      "category": 6,
-      "difficulty": 4,
-      "id": 11,
-      "question": "Which country won the first ever soccer World Cup in 1930?"
-    },
-    {
-      "answer": "George Washington Carver",
-      "category": 4,
-      "difficulty": 2,
-      "id": 12,
-      "question": "Who invented Peanut Butter?"
-    },
-    {
-      "answer": "Lake Victoria",
-      "category": 3,
-      "difficulty": 2,
-      "id": 13,
-      "question": "What is the largest lake in Africa?"
-    },
-    {
-      "answer": "The Palace of Versailles",
-      "category": 3,
-      "difficulty": 3,
-      "id": 14,
-      "question": "In which royal palace would you find the Hall of Mirrors?"
-    }
-  ],
-  "success": true,
-  "total_questions": 19
-}
-```
-#### POST /questions
-- General:
-    - Creates a new question using the submitted question, answer, category, and difficulty. Returns the id of the created question, success value and total questions. 
-- Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"question":"What boxer's original name is Cassius Clay?", "answer": "Muhammad Ali", "category": "4", "difficulty": 1}'`
-```
-{
-  "created": 38,
-  "success": true,
-  "total_questions": 20
-}
-```
+    
+- Sample: `curl http://127.0.0.1:5000/api/regions?page=1`
 
-#### DELETE /questions/{question_id}
+#### GET /api/trails
 - General:
-    - Deletes the question of the given ID if it exists. Returns the id of the deleted question, success value and total questions. 
-- Sample: `curl -X DELETE http://127.0.0.1:5000/questions/38`
-```
-{
-  "deleted": 38,
-  "success": true,
-  "total_questions": 19
-}
-```
-#### POST /questions/search
+    - Returns a list of trail objects, success value, and total number of trails.
+    - Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.
+- Sample: `curl http://127.0.0.1:5000/api/trails?page=1`
+
+#### GET /api/reviews
 - General:
-    - Returns questions based on the submitted search term. 
-    It should return any questions for whom the search term is a substring of the question, success value and total questions found. 
-- Sample: `curl http://127.0.0.1:5000/questions/search -X POST -H "Content-Type: application/json" -d '{"search":"title"}'`
-```
-{
-  "questions": [
-    {
-      "answer": "Maya Angelou",
-      "category": 4,
-      "difficulty": 2,
-      "id": 5,
-      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
-    },
-    {
-      "answer": "Edward Scissorhands",
-      "category": 5,
-      "difficulty": 3,
-      "id": 6,
-      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
-    }
-  ],
-  "success": true,
-  "total_questions": 2
-}
-```
+    - Returns a list of review objects, success value, and total number of reviews.
+    - Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.
+    - Authentication & authorization needed.
+- Sample: `curl 'http://127.0.0.1:5000/api/reviews' -H "Authorization: Bearer ${TOKEN}"`
 
-#### GET /categories/{category_id}/questions
+#### POST /api/regions
 - General:
-    - Returns questions based on of the given category ID if it exists, success value, total questions found and the category type itself.
-- Sample: `curl http://127.0.0.1:5000/categories/3/questions`
+    - Creates a new region object using the submitted name and reg_type. Returns the id of the created region, success value and total regions.
+    - Authentication & authorization needed.
+- Sample: `curl http://127.0.0.1:5000/api/regions -X POST -H "Content-Type: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"name":"Tunis", "reg_type": "Cold"}'`
 
-```
-{
-  "category": "Geography",
-  "questions": [
-    {
-      "answer": "Lake Victoria",
-      "category": 3,
-      "difficulty": 2,
-      "id": 13,
-      "question": "What is the largest lake in Africa?"
-    },
-    {
-      "answer": "The Palace of Versailles",
-      "category": 3,
-      "difficulty": 3,
-      "id": 14,
-      "question": "In which royal palace would you find the Hall of Mirrors?"
-    },
-    {
-      "answer": "Agra",
-      "category": 3,
-      "difficulty": 2,
-      "id": 15,
-      "question": "The Taj Mahal is located in which Indian city?"
-    }
-  ],
-  "success": true,
-  "total_questions": 3
-}
-```
-
-#### POST /quizzes
+#### POST /api/trails
 - General:
-    - Returns questions to play the quiz. 
-    This endpoint should take category and previous question parameters and return a random questions within the given category, if provided, and that is not one of the previous questions.
-- Sample: `curl http://127.0.0.1:5000/quizzes -X POST -H "content-type: application/json" -d '      {"quiz_category": "6", "previous_questions": []}`
+    - Creates a new trail object using the submitted name, distance, elevation, difficulty, coordination, parking. Returns the id of the created trail, success value and total trails.
+    - Authentication & authorization needed.
+- Sample: `curl http://127.0.0.1:5000/api/regions -X POST -H "Content-Type: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{name": "Chenini2","distance": 5,"elevation": 200,"difficulty": "intermediate","coordination": {"region": "Tataouine", "lat": 32.9232228504901, "lon": 10.260753677963038},"parking": false}'`
 
-```
-{
-  "previous_questions": [],
-  "question": {
-    "answer": "Uruguay",
-    "category": 6,
-    "difficulty": 4,
-    "id": 11,
-    "question": "Which country won the first ever soccer World Cup in 1930?"
-  },
-  "quiz_category": "6",
-  "success": true
-}
-```
+#### POST /api/reviews
+- General:
+    - Creates a new review object using the submitted rating, comment and trail_id. Returns the id of the created review, success value and total reviews.
+    - Authentication & authorization needed.
+- Sample: `curl http://127.0.0.1:5000/api/regions -X POST -H "Content-Type: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"rating":4, "comment": "Natural park with a large variety of mediterranean trees and plants", "trail_id": 17}'`
+
+#### DELETE /api/regions/{region_id}
+- General:
+    - Deletes the region object of the given ID if it exists. Returns the id of the deleted region, success value and total regions.
+    - Authentication & authorization needed.
+- Sample: `curl -X DELETE http://127.0.0.1:5000/api/regions/38 -H "Authorization: Bearer ${TOKEN}"`
+
+#### DELETE /api/trails/{trail_id}
+- General:
+    - Deletes the trail object of the given ID if it exists. Returns the id of the deleted trail, success value and total trails.
+    - Authentication & authorization needed.
+- Sample: `curl -X DELETE http://127.0.0.1:5000/api/trails/38 -H "Authorization: Bearer ${TOKEN}"`
+
+#### DELETE /api/reviews/{review_id}
+- General:
+    - Deletes the review object of the given ID if it exists. Returns the id of the deleted review, success value and total reviews.
+    - Authentication & authorization needed.
+- Sample: `curl -X DELETE http://127.0.0.1:5000/api/reviews/38 -H "Authorization: Bearer ${TOKEN}"`
+
+#### PATCH /api/regions/{region_id}
+- General:
+    - Updates the region object of the given ID if it exists. Returns success value and the whole region object.
+    - Authentication & authorization needed.
+- Sample: `curl http://127.0.0.1:5000/api/regions/38 -X PATCH -H "Content-Type: application/json" -d '{"reg_type": "Warm"}' -H "Authorization: Bearer ${TOKEN}"`
+
+#### PATCH /api/trails/{trail_id}
+- General:
+    - Updates the trail object of the given ID if it exists. Returns success value and the whole trail object.
+    - Authentication & authorization needed.
+- Sample: `curl http://127.0.0.1:5000/api/trails/38 -X PATCH -H "Content-Type: application/json" -d '{"name": "Nahli Park"}' -H "Authorization: Bearer ${TOKEN}"`
+
+#### PATCH /api/reviews/{review_id}
+- General:
+    - Updates the review object of the given ID if it exists. Returns success value and the whole review object.
+    - Authentication & authorization needed.
+- Sample: `curl http://127.0.0.1:5000/api/trails/38 -X PATCH -H "Content-Type: application/json" -d '{"rating": 3}' -H "Authorization: Bearer ${TOKEN}"`
