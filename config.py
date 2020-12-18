@@ -1,16 +1,16 @@
 import os
 
 # Set environment variables
-os.environ['DB_USER'] = 'ovepfsvxwtngti'
-os.environ['DB_PASSWORD'] = '2b53033dc8588ef3829bbe579e1f3c5fef8f969c795ec61f9927b5bb650e06ca'
-os.environ['DB_URI'] = 'ec2-18-233-207-22.compute-1.amazonaws.com:5432'
-os.environ['DB_NAME'] = 'd8tem6ngbp77em'
+os.environ['DB_USER'] = 'your_db_user'
+os.environ['DB_PASSWORD'] = 'your_db_password'
+os.environ['DB_URI'] = 'your_db_uri'
+os.environ['DB_NAME'] = 'your_db_name'
 
-os.environ['AUTH0_CLIENT_ID'] = 'W6nH6vK5zg9TveeDZQaAP8tybGrEeP3d'
-os.environ['AUTH0_CLIENT_SECRET'] = 'CLN1xPvWGta_Txr0nqN7jyrk8n4KXm8tB3RgPqN_U-tvwafZMMvGXgfNS8Zy1abZ'
-os.environ['AUTH0_CALLBACK_URL'] = 'https://hiketn.herokuapp.com/callback'
-os.environ['AUTH0_DOMAIN'] = 'strudev-tn.eu.auth0.com'
-os.environ['AUTH0_AUDIENCE'] = 'HikeTNAPI'
+os.environ['AUTH0_CLIENT_ID'] = 'your_auth0_client_id'
+os.environ['AUTH0_CLIENT_SECRET'] = 'your_auth0_client_secret'
+os.environ['AUTH0_CALLBACK_URL'] = 'your_auth0_callback_url'
+os.environ['AUTH0_DOMAIN'] = 'your_auth0_domain'
+os.environ['AUTH0_AUDIENCE'] = 'your_auth0_audience'
 
 os.environ['CALLBACK_PATH'] = '{}/authorize?audience={}&response_type=token&client_id={}&redirect_uri={}'.format(
         os.getenv('AUTH0_DOMAIN'),
