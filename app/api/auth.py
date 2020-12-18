@@ -1,19 +1,18 @@
-import json
+import json, os
 from flask import request
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 
-AUTH0_DOMAIN = 'strudev-tn.eu.auth0.com'
+AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'HikeTNAPI'
+API_AUDIENCE = os.getenv('AUTH0_AUDIENCE')
 
 ## AuthError Exception
 class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
-
 
 ## Auth Header
 def get_token_auth_header():

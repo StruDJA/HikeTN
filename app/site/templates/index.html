@@ -8,18 +8,21 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="header">
+    <div class="bgimg">
+      <div class="header">
         <div class="logo-container">
-            <a href="http://medelle.strumag.tn" style="color:#585772; text-decoration:none"><h4 class="logo">HikeTN<sub>Beta</sub></h4></a>
+            <a href="{{ url_for('site.index') }}" style="text-decoration:none"><h1 class="logo"></h1>HikeTN<sub>Beta</sub></a>
         </div>
-        <div class="social">
-            <a href="https://instagram.com/medellewithme" target="_blank"><img src="{{ url_for('static', filename='img/Instagram.svg') }}" alt="IG" /></a>
-        </div>
-    </div>
-    <div class="banner">
-        <div class="banner-text">
-            Discover your next hike
-        </div>
+        <a href="{{ url_for('site.login') }}" class="login">Login</a>
+      </div>
+      <div class="middle">
+        <h1>Discover your next hike</h1>
+      </div>
+      <div class="footer-container">
+          <div class="footer">
+            Made with <span style="color: #e25555;">&hearts;</span> by <a href="https://twitter.com/TheStruDJA" target="_blank">StruDJA</a>
+          </div>
+      </div>
     </div>
     
     
